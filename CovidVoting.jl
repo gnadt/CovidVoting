@@ -7,7 +7,7 @@ using DataFrames, DelimitedFiles, Plots
 #! population section ========================================================
 #! no longer used, but keeping just in case
 
-##* load data
+##* load data (unsure where file came from originally, but matches covid data)
 file_p = "data/fips_population.txt"
 df_p   = DataFrame(readdlm(file_p,',',skipstart=1),:auto);
 
@@ -24,7 +24,7 @@ push!(df_p, (46102, 14177));
 
 #! covid section =============================================================
 
-##* load data
+##* load data (from https://github.com/CSSEGISandData/COVID-19)
 file_c = "data/time_series_covid19_deaths_US.csv"
 df_c   = DataFrame(readdlm(file_c,',',skipstart=1),:auto);
 df_c   = df_c[df_c[:,:x8].=="US",:]; # only keep US rows
@@ -61,7 +61,7 @@ df_c = df_c[df_c[:,:fips].<=56045,:];
 
 #! voting section ============================================================
 
-##* load data
+##* load data (from https://doi.org/10.7910/DVN/VOQCHQ)
 file_v = "data/countypres_2000-2020.csv"
 df_v = DataFrame(readdlm(file_v,',',skipstart=1),:auto);
 df_v = df_v[df_v[:,:x1].==2020,:]; # only keep 2020 rows
