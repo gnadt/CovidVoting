@@ -28,7 +28,7 @@ push!(df_p, (46102, 14177));
 file_c = "data/time_series_covid19_deaths_US.csv"
 df_c   = DataFrame(readdlm(file_c,',',skipstart=1),:auto);
 df_c   = df_c[df_c[:,:x8].=="US",:]; # only keep US rows
-cols   = DataFrame(readdlm(file,','),:auto)[1,13:end];
+cols   = DataFrame(readdlm(file_c,','),:auto)[1,13:end];
 
 ##* select & rename columns
 df_c = df_c[:,[5;6;7;12;13:end]]
@@ -233,8 +233,9 @@ df_f = vcat(df_f,get_buck(df_5,"Dem $b2-$b3%",days));
 df_f = vcat(df_f,get_buck(df_6,"Dem $b3+%"   ,days));
 
 ##* plotting results
-p1 = plot(ylim=(0,2.5))
+p1 = plot(ylim=(0,2.5),dpi=100)
 for i = 1:size(df_f,1)
     plot!(p1,collect(df_f[i,3:end])./df_f[i,2].*100000,lab=df_f[i,1])
 end
 display(p1)
+# png(p1,"results_here")
